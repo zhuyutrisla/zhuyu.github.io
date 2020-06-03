@@ -55,9 +55,9 @@ hexo s -g       //生成预览
 ### Git Pages 设置
 1. 新建一个repo，可先添加一个README.md, 通过setting开启
 
-![image](/uploads/hexo1.png)图片一
+![image](/zhuyu.github.io/images/hexo1.png)图片一
 
-![image](/uploads/hexo2.png)图片二
+![image](/zhuyu.github.io/images/hexo2.png)图片二
 
 通过图片2得到GitHub Pages 的链接
 

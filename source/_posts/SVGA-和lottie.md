@@ -8,7 +8,7 @@ tags: SVGA
 web端可以采用[SVGA](https://github.com/svga/SVGAPlayer-Web)来实现酷炫的动画。
 
 
-![image](/uploads/shoes.gif)使用SVGA的鞋子动画
+![image](/zhuyu.github.io/images/shoes.gif)使用SVGA的鞋子动画
 
 动画的实现需要先通过After Effects 或是 Animate(Flash) 软件进行设计，导出成相应的SVGA文件后才可使用
 
