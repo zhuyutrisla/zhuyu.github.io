@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/zhuyu.github.io/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/zhuyu.github.io/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/zhuyu.github.io/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/zhuyu.github.io/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/zhuyu.github.io/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/zhuyu.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/zhuyu.github.io/',
+    scheme: 'Mist',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="原文链接  https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;how-did-vim-become-so-popular&#x2F; 你可能听说过vim，一款无所不能的编辑器同时也让人们一直去搜索和处理它的问题。如果你从你的同事中了解到了vim是多么的优秀和快捷，你可能会去尝试它。所以vim是如何成为这个世界的主流编辑器呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译]vim是如何流行起来的">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;07&#x2F;13&#x2F;%E8%AF%91-vim%E6%98%AF%E5%A6%82%E4%BD%95%E6%B5%81%E8%A1%8C%E8%B5%B7%E6%9D%A5%E7%9A%84&#x2F;index.html">
+<meta property="og:site_name" content="祝余的blog">
+<meta property="og:description" content="原文链接  https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;how-did-vim-become-so-popular&#x2F; 你可能听说过vim，一款无所不能的编辑器同时也让人们一直去搜索和处理它的问题。如果你从你的同事中了解到了vim是多么的优秀和快捷，你可能会去尝试它。所以vim是如何成为这个世界的主流编辑器呢？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;static&#x2F;ad5b0a6e4d363f9e5c40fbdcdbe559fb&#x2F;e6523&#x2F;punch-card-stack.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;static&#x2F;dd4157ecc91779d4e893edf95e85f3f5&#x2F;fcda8&#x2F;vi.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;static&#x2F;b20427945c23d658e5827bddebee2fb6&#x2F;fcda8&#x2F;adm-3a-keyboard.png">
+<meta property="og:updated_time" content="2020-07-13T11:56:09.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;pragmaticpineapple.com&#x2F;static&#x2F;ad5b0a6e4d363f9e5c40fbdcdbe559fb&#x2F;e6523&#x2F;punch-card-stack.jpg">
+  <link rel="canonical" href="http://yoursite.com/2020/07/13/%E8%AF%91-vim%E6%98%AF%E5%A6%82%E4%BD%95%E6%B5%81%E8%A1%8C%E8%B5%B7%E6%9D%A5%E7%9A%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>[译]vim是如何流行起来的 | 祝余的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/zhuyu.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">祝余的blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/zhuyu.github.io/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/zhuyu.github.io/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/zhuyu.github.io/2020/07/13/%E8%AF%91-vim%E6%98%AF%E5%A6%82%E4%BD%95%E6%B5%81%E8%A1%8C%E8%B5%B7%E6%9D%A5%E7%9A%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/zhuyu.github.io/uploads/ac.jpg">
+      <meta itemprop="name" content="zhuyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="祝余的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [译]vim是如何流行起来的
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-13 19:52:32 / Modified: 11:56:09" itemprop="dateCreated datePublished" datetime="2020-07-13T19:52:32+00:00">2020-07-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>原文链接  <a href="https://pragmaticpineapple.com/how-did-vim-become-so-popular/" target="_blank" rel="noopener">https://pragmaticpineapple.com/how-did-vim-become-so-popular/</a></p>
+</blockquote><p>你可能听说过vim，一款无所不能的编辑器同时<a href="https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor" target="_blank" rel="noopener">也让人们一直去搜索和处理它的问题</a>。如果你从你的同事中了解到了vim是多么的优秀和快捷，你可能会去尝试它。所以vim是如何成为这个世界的主流编辑器呢？</p><a id="more"></a>
+
+<p>如果我们查看<a href="https://insights.stackoverflow.com/survey/2019#technology-_-most-popular-development-environments" target="_blank" rel="noopener"> StackOverflow survey for 2019 </a>，我们会得知在2019年度，vim占据着最流行的开发环境排行榜中的第五名，有25%的web开发者使用着它。考虑到第一版vim自30年前发布以来(是的，你没听错，vim第一次发布在1991年)，第五名的位置说明这这款编辑器的优秀。</p>
+<p>为了更好的理解vim为什么以及怎么流行起来的，我们最好先从它的起源说起。在<code>vim</code>诞生之前有着<code>vi</code>编辑器，而在<code>vi</code>之前有着<code>ed</code>编辑器。它们的单词拼写都很简短，2个或者3个单词，那它们的背后有什么样的故事呢？让我们一起来深入研究。</p>
+<h3 id="穿孔卡和行编辑器"><a href="#穿孔卡和行编辑器" class="headerlink" title="穿孔卡和行编辑器"></a>穿孔卡和行编辑器</h3><p>如今文本编辑器和完善成熟的IDE（集成开发环境）对于日常的开发工作的重要性不言而喻，但这之前我们有着什么？你或许知道，早期的编码方式是通过将带有小洞的穿孔卡片放入计算机里面。因此，你放置这些卡片的顺序非常重要。例如，这是一张4.5兆字节数据的图片，堆积在62500张打孔卡中。想象一下，删除这些数据并不得不对其重新排序。</p>
+<p><img src="https://pragmaticpineapple.com/static/ad5b0a6e4d363f9e5c40fbdcdbe559fb/e6523/punch-card-stack.jpg" alt="image"></p>
+<p>随着计算机功率和存储的增长以及编程的发展，穿孔卡的效率已无法满足需求。最终人们舍弃了穿孔卡并迎来了行编辑器。ed编辑器就是一个很好的例子，但我们别忘了<code>ed</code>编辑器的前身<code>QED</code>编辑器。</p>
+<h3 id="使用行编辑器"><a href="#使用行编辑器" class="headerlink" title="使用行编辑器"></a>使用行编辑器</h3><p>如果你是使用Linux 或者Mac OS的开发者，打开你的命令行并且输入ed。你会进入到一个平平无奇的行编辑器。如果你对这个发现感到惊讶（就像我以前一样），可以尝试使用它一段时间。要开始写文件时，你需要输入<code>a</code>并按下回车键，之后输入你的文字。按下<code>.</code>并按回车后，将会离开插入模式。然后如果要写入文件到系统上，你可以键入<code>w myfile.txt</code>并按下回车，最后在通过键入<code>q</code>并按回车的方式离开这个编辑器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># ed</span><br><span class="line">a</span><br><span class="line">Hey there!</span><br><span class="line">I am using ed right now, how cool.</span><br><span class="line">OK, that&apos;s enough.</span><br><span class="line">.</span><br><span class="line">w myfile.txt</span><br><span class="line">64</span><br><span class="line">q</span><br></pre></td></tr></table></figure>
+<p>你可能会留意到，<code>ed</code>和目前的<code>vim</code>有些相像之处。如果你使用过<code>vim</code>，你会很快就上手<code>ed</code>这个编辑器的。</p>
+<h3 id="Vim之父-Vi"><a href="#Vim之父-Vi" class="headerlink" title="Vim之父 - Vi"></a>Vim之父 - Vi</h3><p>在<code>ed</code>之后,然后是<code>em</code>- <a href="http://www.eecs.qmul.ac.uk/~gc/history/" target="_blank" rel="noopener">普通人的编辑器</a>， 它可以做与ed类似的事情，但是它“不那么神秘”，是为普通人打造的。基于<code>em</code>的代码，Bill Joy开发了<code>ex</code>，代表着ed的扩展版本。ex除了有之前的模式外，最重要的是它拥有可视模式，这个模式会在整个屏幕上展示你的文件。你一定在想，<a href="https://www.bell-labs.com/usr/dmr/www/qed.html" target="_blank" rel="noopener">为什么他们要创建这个模式出来？</a>那个时候在计算机上显示这些东西非常棘手，有些人认为这是一种资源浪费。但是，在那个时候，可视模式所带来的好处超过了反对意见，并且在编辑时在屏幕上打开文件已成为当今的标准。</p>
+<p><img src="https://pragmaticpineapple.com/static/dd4157ecc91779d4e893edf95e85f3f5/fcda8/vi.png" alt="image"></p>
+<p>就如所说的，可视模式就此诞生，后来，可执行的<code>vi</code>命令被引入操作系统，但现在你仍然可以通过在vi / vim中输入<code>:</code>来访问ex命令。<code>ex</code>于1976年发布，而<code>vi</code>于1979年发布。(40多年前！) 但是，<code>vim</code>是如何诞生的呢？</p>
+<h3 id="模仿游戏"><a href="#模仿游戏" class="headerlink" title="模仿游戏"></a>模仿游戏</h3><p>几年后，出现了许多<code>vi</code>克隆的项目（我最喜欢的是<a href="https://en.wikipedia.org/wiki/Elvis_(text_editor)" target="_blank" rel="noopener">Elvis</a>）。其中之一是由Bram Moolenaar创建的“ Vi Improvement”（Vi改进），这是你尝试在终端中打开<code>vim</code>时看到的名称。在大量不同的vi克隆项目中，vim脱颖而出。Bram使用了一个名为<code>STEVIE</code>（名称为BTW）的<code>vi</code>的克隆项目，并注意到它缺少了许多<code>vi</code>的命令。他添加了一些新功能并使其与<code>vi</code>兼容，并以“ Vi Imitation”的名称发布（后来更改为“ Vi Improved”）。1993年的2.0版本中正式更名为<code>vim</code>并沿用至今。但是vim是如何成名的呢？ <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)#Features_and_improvements_over_vi" target="_blank" rel="noopener">当时它具有许多出色的功能</a>，并且与vi兼容。 功能和兼容性吸引了很多人使用它。</p>
+<h3 id="半个世纪的发展"><a href="#半个世纪的发展" class="headerlink" title="半个世纪的发展"></a>半个世纪的发展</h3><p>如果你看一下在Vim中移动的基本命令：<code>h</code>，<code>j</code>，<code>k</code>和<code>l</code>，这些命令在<code>vi</code>时代以来就是这样。 当时Bill Joy的键盘没有上下左右键可以移动。 另外，<code>ESC</code>键代替了今天的<code>TAB</code>键。 看看当时的情况：</p>
+<p><img src="https://pragmaticpineapple.com/static/b20427945c23d658e5827bddebee2fb6/fcda8/adm-3a-keyboard.png" alt="image"></p>
+<p>替换比如：<code>:%s/text_to_replace/text_to_replace_it_with/</code>的文本的命令也是那个时代的东西。 首次输入编辑器时，必须输入<code>:</code>执行命令是<code>ed</code>编辑器所制订的规范。</p>
+<p>我要说的是，<code>vim</code>是通过半个世纪的努力累积合成的一个好的想法，它使许多工作都向后兼容。 是的，有用的功能可能使Vim闻名。 但是让Vim长久不衰的是Vim考虑处理了几乎所有你能想到的东西的兼容性。 无论今天在哪里使用SSH，都可以启动Vim会话，或者至少启动Vi会话。 这是当今学习的重点（如果不是最重要的话）。</p>
+<p>如果你不是从一个服务器跳到另一个服务器并在该服务器上导航文件的人，那么都使用Vim不会让你感到困扰。 但是，仍然有一些原因使它可能对你有价值。 我正在撰写一篇新的博客文章，解释为什么你应该在2020年学习Vim。如果你对此感兴趣，请考虑<a href="https://pragmaticpineapple.com/newsletter/" target="_blank" rel="noopener">订阅新闻通讯</a>。</p>
+<h3 id="最后的想法"><a href="#最后的想法" class="headerlink" title="最后的想法"></a>最后的想法</h3><p>我非常感激你能读到这里，我希望这篇博客能够指引出为什么Vim会发展为如今的样子。我也希望这篇博客能够激发起你去尝试Vim。你可能不知道你什么时候需要它，或者你什么时候喜欢上它又或者你决定什么时候决定完全使用Vim。</p>
+<p>你也许在你的IDE里或者VSCode设置了Vim模式，我并不是说Vim应该取代您现在正在使用的东西，但尝试学习和配置它会提高您的技能和能力。 另一方面，使用什么编辑器并不重要，重要的是你如何使用它！</p>
+<p>归根结底，关键是要找到适合你的编辑器（工具），让你编码得更好。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/zhuyu.github.io/2020/05/15/SVGA-%E5%92%8Clottie/" rel="next" title="SVGA初体验">
+                  <i class="fa fa-chevron-left"></i> SVGA初体验
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#穿孔卡和行编辑器"><span class="nav-number">1.</span> <span class="nav-text">穿孔卡和行编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用行编辑器"><span class="nav-number">2.</span> <span class="nav-text">使用行编辑器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim之父-Vi"><span class="nav-number">3.</span> <span class="nav-text">Vim之父 - Vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模仿游戏"><span class="nav-number">4.</span> <span class="nav-text">模仿游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半个世纪的发展"><span class="nav-number">5.</span> <span class="nav-text">半个世纪的发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后的想法"><span class="nav-number">6.</span> <span class="nav-text">最后的想法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="zhuyu"
+    src="/zhuyu.github.io/uploads/ac.jpg">
+  <p class="site-author-name" itemprop="name">zhuyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/zhuyu.github.io/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhuyutrisla" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;zhuyutrisla" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:a444531326@gmail.com" title="E-Mail &amp;rarr; mailto:a444531326@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhuyu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.4.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/zhuyu.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/zhuyu.github.io/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/zhuyu.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/zhuyu.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/zhuyu.github.io/js/utils.js?v=7.4.1"></script><script src="/zhuyu.github.io/js/motion.js?v=7.4.1"></script>
+<script src="/zhuyu.github.io/js/schemes/muse.js?v=7.4.1"></script>
+<script src="/zhuyu.github.io/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
